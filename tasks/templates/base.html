@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJANGO CRUD APPLICATION</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/">Django App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="/" class="nav-link active">Home</a>
+                </li>
+                
+                <!-- Logica para mostrar una cosa u otra en funcion de si tiene la sesión iniciada -->
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'tasks' %}" class="nav-link active">Tasks pending</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'tasks_completed' %}" class="nav-link active">Tasks completed</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link active">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/tasks/create/" class="nav-link active">Create task</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="/signup" class="nav-link active">Signup</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/signin" class="nav-link active">Signin</a>
+                </li>
+                {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <!-- Base contiene el contenido conmun de todas las páginas -->
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
